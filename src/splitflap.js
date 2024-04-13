@@ -93,7 +93,7 @@ class SplitFlapDisplay {
         this.element = element;
         this.segments = [];
 
-        var children = Array.from(this.element.children).filter(child => child.classList.contains('segment'));
+        var children = this.element.querySelectorAll('.segment');
         const initialValues = typeof config.initialValue === 'string' ? 
                               (children.length === 1 ? [config.initialValue] : config.initialValue.split('')) : 
                               config.initialValue;
