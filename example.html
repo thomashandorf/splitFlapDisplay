@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Split Flap Display</title>
+<link rel="stylesheet" href="src/splitflap.css">
+<script src="src/splitflap.js"></script>
+<style>
+    body {
+        font-size: 24px;
+    }
+    #segment-test {
+        width: 1.2em;
+    }
+    #clock-test {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 50px
+    }
+    #clock-test .segment {
+        width: 1.2em;
+        height: 1.4em;
+    }
+    #clock-test .dot {
+        font-size: 1em;
+    }
+</style>
+</head>
+<body>
+<div id="segment-test" class="segment"></div>
+<div id="display-test"></div>
+<div id="clock-test">
+    <span class="segment"></span><span class="dot">:</span><span class="segment"></span><span class="dot">:</span><span class="segment"></span>
+</div>
+
+<script>
+
+const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const numbers100 = Array.from({length: 100}, (_, i) => i.toString().padStart(2, '0'));
+const upperletters = [' ', ...Array.from({length: 26}, (_, i) => String.fromCharCode(i + 65))];
+const hours = Array.from({length: 24}, (_, i) => i.toString().padStart(2, '0'));
+const minutes = Array.from({length: 60}, (_, i) => i.toString().padStart(2, '0'));
+function clockInput(time)
+	{
+		return [new Date().getHours(), new Date().getMinutes(), new Date().getSeconds()].map(v => v.toString().padStart(2, '0'));
+	}
+document.addEventListener('DOMContentLoaded', function() {
+
+    // while you can directly create a segment it's recommended to create a display instead even if it only contains one segment
+    const segment = new SplitFlapSegment(document.getElementById('segment-test'), numbers100, '00');
+    // create a display of size 10 with uppercase letters
+    const display = new SplitFlapDisplay(document.getElementById('display-test'), {alphabet: upperletters, numSegments: 10, initialValue: 'HELLO'});
+    const clock = new SplitFlapDisplay(document.getElementById('clock-test'), {alphabets: [hours,minutes,minutes], initialValue: ['00','00','00']});
+    
+    setTimeout(() => {
+        segment.flipTo('33');
+        display.flipTo('THERE')
+    }, 1000); // Delay update to see the initial state
+
+    setInterval(() => {
+        clock.flipTo(clockInput(new Date()));
+    },1000)
+});
+</script>
+</body>
+</html>
