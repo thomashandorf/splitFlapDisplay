@@ -1,6 +1,6 @@
 # SplitFlapDisplay
 
-Welcome to the SplitFlapDisplay project! This project simulates the nostalgic mechanical split-flap displays commonly seen in train stations or airports. These displays provide a visually appealing way to show text updates dynamically.
+This project simulates the nostalgic mechanical split-flap displays commonly seen in train stations or airports. These displays provide a visually appealing way to show text updates dynamically. Flaping is animated using CSS transitions. 
 
 ![Example Split Flap Display](example.jpg)
 
@@ -61,8 +61,8 @@ Alternatively, if the parent element contains child elements with the class segm
 ### Alphabets
 Each segment can have its own alphabet, which can consist of single letters, digits, or even longer strings. For example:
 
-Alphabet for numbers: `['0', '1', '2', '3', ..., '9']`
-Alphabet for an elevator display: `['-1', ' G', ' 1', ' 2', ' 3', ' 4']`
+- Alphabet for numbers: `['0', '1', '2', '3', ..., '9']`
+- Alphabet for an elevator display: `['-1', ' G', ' 1', ' 2', ' 3', ' 4']`
 ### Updating Values
 Use the `flipTo(value)` method to update the display. The display will run through the alphabet until the target value is reached. Values for `initialValue` or `flipTo` can be either an array of strings or a single string. A single string will be split into characters if there are more than one segment in the display.
 ```javascript
